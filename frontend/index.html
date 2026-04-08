@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hola Mundo Fullstack</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 2rem; }
+        .card { border: 1px solid #ccc; padding: 1rem; border-radius: 8px; max-width: 400px; }
+    </style>
+</head>
+<body>
+    <h1>Hola Mundo!</h1>
+    
+    <div class="card">
+        <h3>Datos recibidos del Backend:</h3>
+        <p><strong>DB (PostgreSQL):</strong> <span id="db-data">Cargando...</span></p>
+        <p><strong>API Externa:</strong> <span id="api-data">Cargando...</span></p>
+    </div>
+
+    <script>
+        fetch('/api/data')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('db-data').textContent = data.db_message;
+                document.getElementById('api-data').textContent = data.third_party_api_user;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('db-data').textContent = "Error al cargar";
+                document.getElementById('api-data').textContent = "Error al cargar";
+            });
+    </script>
+</body>
+</html>
